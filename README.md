@@ -2,7 +2,7 @@
 
 ## Overview
 AI Agent MCP-Plugged is an intelligent assistant powered by OpenAI's Gemini model and integrated with MCP tools for enhanced functionality. It provides insightful, well-structured responses and supports calculations such as tax computation, loan repayment, and compound interest.
-
+demo: https://saqibkareem-sk-ai-agent.hf.space/
 ## Features
 - **Conversational AI**: Engages in meaningful conversations using OpenAI's Gemini model.
 - **MCP Tool Integration**: Supports tax calculation, loan repayment, and compound interest computations.
@@ -86,7 +86,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 Contact
 For questions or support, reach out via:
 
-Email: support@example.com
+Email: saqib.kareem.gmb@gmail.com
 
 GitHub Issues: Create an issue
 
@@ -111,15 +111,16 @@ AI Agent MCP-Plugged is an intelligent assistant powered by OpenAI's Gemini mode
 ## Installation
 
 ### Prerequisites
-- Python 3.8+
-- OpenAI API Key (Gemini)
+- Python 3.11+
+- OpenAI API Key = dummy
+- Gemini API Key
 - MCP Server Access
 - Streamlit
 
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/ai-agent-mcp.git
+git clone https://huggingface.co/spaces/saqibkareem/SK_AI_Agent
 Navigate to the project directory:
 
 bash
@@ -184,6 +185,6 @@ This project is licensed under the MIT License. See the LICENSE file for details
 Contact
 For questions or support, reach out via:
 
-Email: support@example.com
+Email: saqib.kareem.gmb@gmail.com
 
 GitHub Issues: Create an issue
