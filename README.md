@@ -3,6 +3,68 @@
 ## Overview
 AI Agent MCP-Plugged is an intelligent assistant powered by OpenAI's Gemini model and integrated with MCP tools for enhanced functionality. It provides insightful, well-structured responses and supports calculations such as tax computation, loan repayment, and compound interest.
 demo: https://saqibkareem-sk-ai-agent.hf.space/
+
+## RunContextWrapper
+
+The `RunContextWrapper` is a core component from the `openai-agents` library used in this project. It serves as a wrapper around the context object passed to `Runner.run()`.
+
+### What is RunContextWrapper?
+
+`RunContextWrapper` is a dataclass that provides:
+
+1. **Context Storage**: Wraps a user-provided context object of any type (`TContext`)
+2. **Usage Tracking**: Tracks token usage and other statistics for the agent run
+
+### Import
+
+```python
+from agents import RunContextWrapper
+```
+
+### Class Definition
+
+```python
+@dataclass
+class RunContextWrapper(Generic[TContext]):
+    context: TContext  # The context object passed to Runner.run()
+    usage: Usage       # Usage statistics of the agent run
+```
+
+### Attributes
+
+| Attribute | Type | Description |
+|-----------|------|-------------|
+| `context` | `TContext` | The context object (or None) passed by you to `Runner.run()` |
+| `usage` | `Usage` | The usage statistics of the agent run so far. For streamed responses, usage will be stale until the last chunk is processed. |
+
+### Important Notes
+
+- **Contexts are NOT passed to the LLM**: They're a way to pass dependencies and data to your code (tool functions, callbacks, hooks, etc.)
+- The `RunContextWrapper` is available in tool functions, hooks, and callbacks during agent execution
+- Use it to share state, database connections, or other resources across your agent's tools
+
+### Example Usage
+
+```python
+from agents import Agent, Runner, RunContextWrapper, function_tool
+
+# Define a custom context
+class MyContext:
+    def __init__(self, user_id: str):
+        self.user_id = user_id
+
+# Create a tool that uses the context
+@function_tool
+def get_user_info(ctx: RunContextWrapper[MyContext]) -> str:
+    return f"User ID: {ctx.context.user_id}"
+
+# Run the agent with context
+async def main():
+    agent = Agent(name="Assistant", tools=[get_user_info])
+    context = MyContext(user_id="12345")
+    result = await Runner.run(agent, "Get my user info", context=context)
+```
+
 ## Features
 - **Conversational AI**: Engages in meaningful conversations using OpenAI's Gemini model.
 - **MCP Tool Integration**: Supports tax calculation, loan repayment, and compound interest computations.
